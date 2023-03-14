@@ -8,33 +8,67 @@ import baseStyled, {
 // グローバル スタイル 定義
 // tslint:disable-next-line:no-unused-expression
 export const GlobalStyle = createGlobalStyle`
-    html, body {
-        font-family: "Meiryo UI";
-        font-size: 12pt;
-        height: 100vh;
-        width: 100vw;
+  @font-face {
+    font-family: "M PLUS 1p";
+    src: url('./fonts/MPLUS1p-Thin.ttf');
+    font-weight: 100;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "M PLUS 1p";
+    src: url('./fonts/MPLUS1p-Light.ttf');
+    font-weight: 300;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "M PLUS 1p";
+    src: url('./fonts/MPLUS1p-Regular.ttf');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "M PLUS 1p";
+    src: url('./fonts/MPLUS1p-Bold.ttf');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "M PLUS 1p";
+    src: url('./fonts/MPLUS1p-Black.ttf');
+    font-weight: 900;
+    font-style: normal;
+  }
+  * {
+    font-family: 'M PLUS 1p', sans-serif;
+    margin: 0;
+    user-select: none;
+  }
+  html, body {
+    font-size: 1.2vw;
+    height: 100vh;
+    width: 100vw;
+  }
+  button {
+    background-color: transparent;
+    border-radius: 5px;
+    border-style: none;
+    cursor: pointer;
+    padding: .5em;
+    transition-property: all;
+    transition-duration: .2s;
+    &:hover {
+      box-shadow: 3px 3px 3px rgba(200,200,200,4);
+      transform: translate(-2px, -2px);
     }
-    button {
-        background-color: #ccc;
-        border-radius: 5px;
-        border-style: none;
-        cursor: pointer;
-        padding: .5em;
-        transition-property: all;
-        transition-duration: .2s;
-        &:hover {
-            box-shadow: 3px 3px 3px rgba(200,200,200,4);
-            transform: translate(-2px, -2px);
-        }
-        &:active {
-            background-color: #cccc00;
-        }
+    &:active {
+      background-color: #cccc00;
     }
-    input[type=text] {
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        padding: .5em;
-    }
+  }
+  input[type=text] {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: .5em;
+  }
 `;
 
 // テーマの設定
