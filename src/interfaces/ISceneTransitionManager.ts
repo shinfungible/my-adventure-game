@@ -1,18 +1,24 @@
-interface SceneTransition {
-  (from: React.ReactNode, to: React.ReactNode, props: any): void;
-}
+import { ExtendedSceneData } from "../types/ExtendedSceneData";
 
-interface SceneTransitionMap {
-  [key: string]: SceneTransition;
-}
+type SceneTransitionFunction = (
+  currentScene: ExtendedSceneData,
+  nextScene: ExtendedSceneData,
+  onTransitionComplete: () => void
+) => void;
 
-interface SceneTransitionManagerProps {
-  transitions: SceneTransitionMap;
-}
+type SceneTransitionMap = {
+  [key: string]: {
+    [key: string]: SceneTransitionFunction;
+  };
+};
 
 interface ISceneTransitionManager {
-  transitions: SceneTransitionMap;
-  runTransition(transitionName: string, from: React.ReactNode, to: React.ReactNode, props: any): void;
+  runTransitionById: (
+    currentSceneId: string,
+    nextSceneId: string,
+    currentScene: ExtendedSceneData,
+    nextScene: ExtendedSceneData,
+  ) => Promise<void>;
 }
 
-export { SceneTransition, SceneTransitionMap, SceneTransitionManagerProps, ISceneTransitionManager };
+export { SceneTransitionFunction, SceneTransitionMap, ISceneTransitionManager };

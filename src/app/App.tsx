@@ -3,7 +3,7 @@ import GameEngine from '../classes/GameEngine';
 import SceneDataManager from '../classes/SceneDataManager';
 import SceneTransitionManager from '../classes/SceneTransitionManager';
 import ThreeManager from '../classes/ThreeManager';
-import { SceneTransitionMap } from '../types/SceneTransition';
+import { SceneTransitionMap } from '../interfaces/ISceneTransitionManager';
 import { styled } from './styles/GlobalStyles';
 
 const Container = styled.div`
@@ -20,7 +20,7 @@ const App: React.FC = () => {
 
     const transitions: SceneTransitionMap = {};
 
-    const sceneTransitionManager = new SceneTransitionManager({ transitions: transitions });
+    const sceneTransitionManager = new SceneTransitionManager(transitions);
     const sceneDataManager = new SceneDataManager(sceneTransitionManager);
     const threeManager = ThreeManager.getInstance();
     threeManager.init(containerRef.current);

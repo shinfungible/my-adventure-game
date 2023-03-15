@@ -1,19 +1,27 @@
-import { ISceneTransitionManager, SceneTransitionMap, SceneTransitionManagerProps } from '../interfaces/ISceneTransitionManager';
+import { ISceneTransitionManager, SceneTransitionMap } from '../interfaces/ISceneTransitionManager';
+import { ExtendedSceneData } from '../types/ExtendedSceneData';
 
 class SceneTransitionManager implements ISceneTransitionManager {
   transitions: SceneTransitionMap;
 
-  constructor(props: SceneTransitionManagerProps) {
-    this.transitions = props.transitions;
+  constructor(transitions: SceneTransitionMap) {
+    this.transitions = transitions;
   }
 
-  runTransition(transitionName: string, from: React.ReactNode, to: React.ReactNode, props: any): void {
-    if (!this.transitions[transitionName]) {
-      throw new Error(`Transition not found: ${transitionName}`);
+  async runTransitionById(
+    currentSceneId: string,
+    nextSceneId: string,
+    currentScene: ExtendedSceneData,
+    nextScene: ExtendedSceneData,
+  ): Promise<void> {
+    const transitionFunction = this.transitions[currentSceneId]?.[nextSceneId];
+
+    if (!transitionFunction) {
+      throw new Error(`Transition not found for ${currentSceneId} to ${nextSceneId}`);
     }
 
-    const transition = this.transitions[transitionName];
-    transition(from, to, props);
+    transitionFunction(currentScene, nextScene, () => {});
   }
 }
+
 export default SceneTransitionManager;
