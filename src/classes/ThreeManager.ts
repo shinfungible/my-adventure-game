@@ -2,14 +2,22 @@ import * as THREE from 'three';
 import { IThreeManager } from '../interfaces/IThreeManager';
 
 class ThreeManager implements IThreeManager {
+  private static instance: ThreeManager;
   renderer: THREE.WebGLRenderer;
   camera: THREE.PerspectiveCamera;
   scene: THREE.Scene;
 
-  constructor() {
+  private constructor() {
     this.renderer = new THREE.WebGLRenderer();
     this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     this.scene = new THREE.Scene();
+  }
+
+  public static getInstance(): ThreeManager {
+    if (!ThreeManager.instance) {
+      ThreeManager.instance = new ThreeManager();
+    }
+    return ThreeManager.instance;
   }
 
   init(container: HTMLElement): void {

@@ -22,7 +22,7 @@ const App: React.FC = () => {
 
     const sceneTransitionManager = new SceneTransitionManager({ transitions: transitions });
     const sceneDataManager = new SceneDataManager(sceneTransitionManager);
-    const threeManager = new ThreeManager();
+    const threeManager = ThreeManager.getInstance();
     threeManager.init(containerRef.current);
     const threeObjects = threeManager.getThreeObjects();
     const gameEngine = new GameEngine(sceneDataManager, sceneTransitionManager, threeObjects);
