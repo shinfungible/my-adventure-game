@@ -1,18 +1,9 @@
 import React from 'react';
 import { GameLogicType } from '../types/GameLogic';
 import { ISceneDataManager } from '../interfaces/ISceneDataManager';
-import { ISceneTransitionManager, SceneTransitionFunction } from '../interfaces/ISceneTransitionManager';
-import { ReactNode } from 'react';
-
-import TitleScene from '../scenes/title/TitleScene';
-import NovelScene from '../scenes/novel/NovelScene';
-import ExplorerScene from '../scenes/explorer/ExplorerScene';
-
+import { ISceneTransitionManager } from '../interfaces/ISceneTransitionManager';
 import { titleScenes, novelScenes, explorerScenes } from '../gameData/gameData';
-
 import { ExtendedSceneData } from '../types/ExtendedSceneData';
-import { NovelSceneData } from '../types/NovelSceneData';
-
 import { SceneData } from '../types/SceneData';
 import renderFunctions from '../utils/RenderFunctions';
 
