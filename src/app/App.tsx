@@ -6,28 +6,34 @@ import ThreeManager from '../classes/ThreeManager';
 import { SceneTransitionMap } from '../types/SceneTransition';
 import { styled } from './styles/GlobalStyles';
 
-const Empty = styled.div`
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
   background-color: transparent;
 `;
 
 const App: React.FC = () => {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
   useEffect(() => {
+    if (!containerRef.current) return;
+
     const transitions: SceneTransitionMap = {};
 
     const sceneTransitionManager = new SceneTransitionManager({ transitions: transitions });
     const sceneDataManager = new SceneDataManager(sceneTransitionManager);
     const threeManager = new ThreeManager();
-    threeManager.init(document.getElementById('root') as HTMLElement);
+    threeManager.init(containerRef.current);
     const threeObjects = threeManager.getThreeObjects();
     const gameEngine = new GameEngine(sceneDataManager, sceneTransitionManager, threeObjects);
     
     return () => {
       // cleanup
     };
-  }, []);
+  }, [containerRef]);
 
   return (
-    <Empty />
+    <Container ref={containerRef} />
   );
 };
 
